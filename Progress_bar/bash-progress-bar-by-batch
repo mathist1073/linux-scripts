@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+
+progress-bar() {
+	local current=$1
+	local len=$2
+	local length=50
+	local bar_char='|'
+	local  empty_char='.'
+	local perc_done=$((current * 100 / len))
+	# Display the correct number of bars to not overgone the screen width
+	local num_bar=$((perc_done * length / 100))
+
+
+	local s='['
+	local i
+
+	for ((i = 0; i < num_bar; i++ )); do
+		s+=$bar_char
+	done
+
+	for ((i = num_bar; i < length; i++ )); do 
+		s+=$empty_char
+	done
+	s+=']'
+
+	echo -ne "$s  $current/$len ($perc_done%)\r"
+
+
+}
+
+process-files(){
+	local files=($@)
+	# For example delete file -->rm "${files[@]}" 
+
+	sleep .01
+}
+
+
+# Turn on lib globstar for recursivity
+shopt -s globstar nullglob
+
+echo 'Findind files'
+# find . -name '*cache'
+
+# Creating an array of files
+files=(./**/*cache)
+len=${#files[@]}
+
+# Command to create multiple file for the test --> touch bar/foo-{1..100}-cache
+echo "Found $len files"
+
+batch_size=5
+
+
+# Loop through the files
+for ((i = 0; i < len; i += batch_size)); do
+	progress-bar "$((i+1))" "$len"
+	# Send a slice of array with : 
+	process-files "${files[@]:i:batch_size}"
+done
+	progress-bar "$len" "$len"
+
+echo
