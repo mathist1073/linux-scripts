@@ -28,7 +28,7 @@ while [[ -f file.txt ]]; do
 	sleep 1
 done
 
-
+#test gi#test gitt
 until [[ -f file.txt ]]; do
 	echo "file.txt exists and is a file"
 	sleep 1
