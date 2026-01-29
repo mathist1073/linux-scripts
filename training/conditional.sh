@@ -22,7 +22,7 @@ fi
 
 
 
-
+# Loop example
 while [[ -f file.txt ]]; do
 	echo "file.txt exists and is a file"
 	sleep 1
