@@ -1,0 +1,11 @@
+name,age,city,color
+Alice,20,New York,blue
+Bob,60,Chicago,red
+Charlies,11,Boston,yellow
+Danna,28,Los Angeles,purple
+
+
+cat test.csv | tr , '\t'
+
+cat test.csv | cut -d , -f 1,2
+cat test.csv | cut -d , -f 2-
