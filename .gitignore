@@ -1,0 +1,4 @@
+# Ignore all cache files in the bar directory
+Progress_bar/bar/foo-*-cache
+# Or just ignore the whole bar directory if it's all junk
+Progress_bar/bar/
